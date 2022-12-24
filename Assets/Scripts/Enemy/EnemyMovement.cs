@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public GameObject bloodSplash;
     private EnemyInfo enemyInfo;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,24 @@ public class EnemyMovement : MonoBehaviour
         else if (enemyInfo.targetPosition.position.x > transform.position.x)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            if (enemyInfo.attackCool > enemyInfo.attackSpeed)
+            {
+                collision.gameObject.GetComponent<PlayerInfo>().playerHealth -= enemyInfo.attackDamage;
+                enemyInfo.attackCool = 0f;
+                Destroy(Instantiate(bloodSplash, collision.transform.position, bloodSplash.transform.rotation), 1f);
+
+                if (collision.gameObject.GetComponent<PlayerInfo>().playerHealth <= 0)
+                {
+                    print("GameOver");
+                }
+            }
         }
     }
 }

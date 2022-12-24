@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+    public float playerHealth = 100f;
+    public float playerMaxHealth = 100f;
+
     public float moveSpeed = 5f;
     public float attackSpeed = 1f;
 

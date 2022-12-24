@@ -157,8 +157,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
   moveSpeed: 5
-  maxHealth: 10
-  health: 0
+  attackSpeed: 1
+  enemyMaxHealth: 10
+  enemyHealth: 0
+  attackCool: 0
+  attackDamage: 1
 --- !u!114 &-7329306462425538608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974c64b466b882e41a8430dea6fb4dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplash: {fileID: 7850312814116222602, guid: a0e3fed63a70bce47b0439112cd479c4, type: 3}
 --- !u!61 &-2810202525068834287
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215,7 +219,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!1 &7387360734180868808

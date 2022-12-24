@@ -44,9 +44,9 @@ public class PlayerAttackDamage : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Enemy"))
         {
-            collision.GetComponent<EnemyInfo>().health -= playerInfo.attackDamage;
+            collision.GetComponent<EnemyInfo>().enemyHealth -= playerInfo.attackDamage;
             Destroy(Instantiate(bloodSplash, collision.transform.position, bloodSplash.transform.rotation), 1f);
-            if(collision.GetComponent<EnemyInfo>().health <= 0)
+            if(collision.GetComponent<EnemyInfo>().enemyHealth <= 0)
             {
                 Destroy(collision.gameObject);
             }

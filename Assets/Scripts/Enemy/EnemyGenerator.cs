@@ -56,7 +56,7 @@ public class EnemyGenerator : MonoBehaviour
                 float spawnX = spawnDirectionX[spawnDirectionIndex] * (Random.Range(minDistance, maxDistance) + Random.Range(0, noiseDistance));
                 float spawnY = spawnDirectionY[spawnDirectionIndex] * (Random.Range(minDistance, maxDistance) + Random.Range(0, noiseDistance));
 
-                Instantiate(enemyList[enemyIndex], new Vector3(spawnX, spawnY, 0), Quaternion.identity);
+                Instantiate(enemyList[enemyIndex], playerPosition.position + new Vector3(spawnX, spawnY, 0), Quaternion.identity);
             }
         }
     }

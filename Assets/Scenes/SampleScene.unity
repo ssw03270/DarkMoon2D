@@ -233,7 +233,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -320,6 +320,11 @@ MonoBehaviour:
   moveSpeedDown: 1
   attackSpeedDown: 1
   attackCool: 0
+--- !u!4 &1684293734 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1221219518928168898, guid: 4a720944a115d9447a4996ddaa03525b, type: 3}
+  m_PrefabInstance: {fileID: 198762560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900421908
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,14 +438,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cedeae9c428f2b44ace306a14ecac31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPosition: {fileID: 0}
-  minDistance: 5
-  maxDistance: 10
+  playerPosition: {fileID: 1684293734}
+  minDistance: 10
+  maxDistance: 15
   noiseDistance: 3
   minSpawnCount: 1
   maxSpawnCount: 5
   spawnCool: 0
-  spawnSpeed: 1
+  spawnSpeed: 5
   enemyList: []
   playerPrefabName: Character (96)
 --- !u!4 &1956694153

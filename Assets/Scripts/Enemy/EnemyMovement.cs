@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
         Rotate();
@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, enemyInfo.targetPosition.position, Time.deltaTime * enemyInfo.moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, enemyInfo.targetPosition.position, Time.fixedDeltaTime * enemyInfo.moveSpeed);
     }
 
     private void Rotate()

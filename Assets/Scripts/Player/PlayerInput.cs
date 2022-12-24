@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     public bool mouseLeftClick;
 
     // 매프레임 사용자 입력을 감지
-    private void Update()
+    private void FixedUpdate()
     {
         /*if (GameManager.instance != null && GameManager.instance.isGameover)
         {

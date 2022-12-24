@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Transform Camera;
+    public Transform cameraPosition;
+    public GameObject attackRange;
 
     private PlayerInfo playerInfo;
     private PlayerInput playerInput;
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
         Rotation();
@@ -38,25 +39,42 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("isMoving", false);
         }
-        transform.position += new Vector3(playerInput.horizontal, playerInput.vertical, 0f) * Time.deltaTime * playerInfo.GetMoveSpeed();
-        Camera.position = transform.position + new Vector3(0, 0, -10);
+        transform.position += new Vector3(playerInput.horizontal, playerInput.vertical, 0f) * Time.fixedDeltaTime * playerInfo.GetMoveSpeed();
+        cameraPosition.position = transform.position + new Vector3(0, 0, -10);
     }
     private void Rotation()
     {
-        if(playerInput.horizontal > 0)
+        if (!playerInfo.isAttacking)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (playerInput.horizontal > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (playerInput.horizontal < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-        else if(playerInput.horizontal < 0)
+        else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            float mousePosX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+            if(transform.position.x < mousePosX)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
+        
     }
     private void Attack()
     {
         if (playerInput.mouseLeftClick && playerInfo.IsAttackAble())
         {
             playerAnimator.SetBool("attack", true);
+            attackRange.SetActive(true);
             playerInfo.attackCool = 0f;
         }
     }
@@ -64,15 +82,14 @@ public class PlayerMovement : MonoBehaviour
     private void SetAnimationSpeed()
     {
         var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-
         if (stateInfo.fullPathHash == Animator.StringToHash("Base Layer.move"))
         {
-            playerAnimator.speed = playerInfo.moveSpeedDown;
+            playerAnimator.speed = playerInfo.moveSpeedRate;
         }
 
         if (stateInfo.fullPathHash == Animator.StringToHash("Base Layer.attack"))
         {
-            playerAnimator.speed = playerInfo.attackSpeedDown;
+            playerAnimator.speed = playerInfo.attackSpeedRate;
         }
     }
 }

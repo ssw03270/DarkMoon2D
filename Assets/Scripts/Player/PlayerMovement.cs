@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject attackRange;
 
     public AudioSource attackAudio;
+    public AudioSource dashAudio;
 
     private PlayerInfo playerInfo;
     private PlayerInput playerInput;
     private Animator playerAnimator;
+    private Rigidbody2D playerRigidbody;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         playerInfo = GetComponent<PlayerInfo>();
         playerInput = GetComponent<PlayerInput>();
         playerAnimator = GetComponent<Animator>();
+        playerRigidbody = GetComponent<Rigidbody2D>();
         SetAudioOff();
     }
 
@@ -28,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Rotation();
         Attack();
+        Dash();
         SetAnimationSpeed();
     }
 
@@ -81,6 +85,16 @@ public class PlayerMovement : MonoBehaviour
             playerInfo.attackCool = 0f;
         }
     }
+    private void Dash()
+    {
+        if (playerInput.mouseRightClick && playerInfo.IsDashAble())
+        {
+            dashAudio.Play();
+            playerAnimator.SetBool("dash", true);
+            playerInfo.dashCool = 0f;
+            playerRigidbody.AddForce(new Vector2(playerInput.horizontal * playerInfo.dashPower, 0f), ForceMode2D.Impulse);
+        }
+    }
 
     private void SetAnimationSpeed()
     {
@@ -99,5 +113,6 @@ public class PlayerMovement : MonoBehaviour
     private void SetAudioOff()
     {
         attackAudio.Stop();
+        dashAudio.Stop();
     }
 }

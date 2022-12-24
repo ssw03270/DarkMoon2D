@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
     public float mouseX;
     public float mouseY;
     public bool mouseLeftClick;
+    public bool mouseRightClick;
 
     // 매프레임 사용자 입력을 감지
     private void FixedUpdate()
@@ -32,6 +33,7 @@ public class PlayerInput : MonoBehaviour
         mouseX = Input.GetAxis(mouseXAxisName);
         mouseY = Input.GetAxis(mouseYAxisName);
         mouseLeftClick = Input.GetMouseButton(0);
+        mouseRightClick = Input.GetMouseButton(1);
     }
 
 }

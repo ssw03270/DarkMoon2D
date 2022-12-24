@@ -9,15 +9,20 @@ public class PlayerInfo : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float attackSpeed = 1f;
+    public float dashSpeed = 3f;
 
     public float attackDamage = 1f;
 
+    public float dashPower = 2f;
+
     public float moveSpeedRate = 1f;
     public float attackSpeedRate = 1f;
+    public float dashSpeedRate = 1f;
 
     public float attackDamageUp = 1f;
 
     public float attackCool = 0f;
+    public float dashCool = 0f;
 
     public bool isAttacking = false;
 
@@ -40,8 +45,13 @@ public class PlayerInfo : MonoBehaviour
     {
         return attackCool > attackSpeed / attackSpeedRate;
     }
+    public bool IsDashAble()
+    {
+        return dashCool > dashSpeed / dashSpeedRate;
+    }
     public void AddTime()
     {
         attackCool += Time.fixedDeltaTime;
+        dashCool += Time.fixedDeltaTime;
     }
 }

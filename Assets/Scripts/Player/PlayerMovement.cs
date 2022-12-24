@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraPosition;
     public GameObject attackRange;
 
+    public AudioSource attackAudio;
+
     private PlayerInfo playerInfo;
     private PlayerInput playerInput;
     private Animator playerAnimator;
@@ -17,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         playerInfo = GetComponent<PlayerInfo>();
         playerInput = GetComponent<PlayerInput>();
         playerAnimator = GetComponent<Animator>();
-
+        SetAudioOff();
     }
 
     // Update is called once per frame
@@ -73,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerInput.mouseLeftClick && playerInfo.IsAttackAble())
         {
+            attackAudio.Play();
             playerAnimator.SetBool("attack", true);
             attackRange.SetActive(true);
             playerInfo.attackCool = 0f;
@@ -91,5 +94,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.speed = playerInfo.attackSpeedRate;
         }
+    }
+
+    private void SetAudioOff()
+    {
+        attackAudio.Stop();
     }
 }

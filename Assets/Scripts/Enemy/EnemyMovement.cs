@@ -5,11 +5,14 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject bloodSplash;
+
     private EnemyInfo enemyInfo;
+    private Animator enemyAnimator;
     // Start is called before the first frame update
     void Start()
     {
         enemyInfo = GetComponent<EnemyInfo>();
+        enemyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Move()
     {
+        enemyAnimator.SetBool("isMoving", true);
         transform.position = Vector3.MoveTowards(transform.position, enemyInfo.targetPosition.position, Time.fixedDeltaTime * enemyInfo.moveSpeed);
     }
 

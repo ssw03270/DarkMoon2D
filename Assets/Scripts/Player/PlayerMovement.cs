@@ -92,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
             dashAudio.Play();
             playerAnimator.SetBool("dash", true);
             playerInfo.dashCool = 0f;
-            playerRigidbody.AddForce(new Vector2(playerInput.horizontal * playerInfo.dashPower, 0f), ForceMode2D.Impulse);
+            float rate = Mathf.Sqrt(Mathf.Abs(playerInput.horizontal) + Mathf.Abs(playerInput.vertical));
+            playerRigidbody.AddForce(new Vector2(playerInput.horizontal * playerInfo.dashPower / rate, playerInput.vertical * playerInfo.dashPower / rate), ForceMode2D.Impulse);
         }
     }
 
